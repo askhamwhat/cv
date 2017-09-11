@@ -72,6 +72,13 @@ FUNCTION {init.state.consts}
   #2 'after.sentence :=
   #3 'after.block :=
 }
+
+INTEGERS { output.number }
+
+FUNCTION { init.output.number }
+{ #0 'output.number :=
+}
+
 STRINGS { s t}
 FUNCTION {output.nonnull}
 { 's :=
@@ -109,6 +116,9 @@ FUNCTION {output.check}
 FUNCTION {fin.entry}
 { add.period$
   write$
+  "\label{" write$
+  cite$ write$
+  "}" write$
   "\\" write$
   newline$
 }
@@ -485,12 +495,14 @@ FUNCTION {format.title}
   "title" bibinfo.check
 }
 FUNCTION {output.bibitem}
-{ newline$
-  "\label{" write$
-  cite$ write$
-  "}" write$
-  newline$
-  ""
+{ %newline$
+%  newline$
+  "{["
+  write$
+  output.number #1 + 'output.number := % increment count
+  output.number int.to.str$ 
+  write$
+  "]} & "
   before.all 'output.state :=
 }
 
@@ -1345,6 +1357,7 @@ FUNCTION {longest.label.pass}
     'skip$
   if$
 }
+
 EXECUTE {initialize.longest.label}
 ITERATE {longest.label.pass}
 FUNCTION {begin.bib}
@@ -1358,7 +1371,7 @@ FUNCTION {begin.bib}
   write$ newline$
   "  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup \urlstyle{rm}\Url}\fi"
   write$ newline$
-  "\begin{tabular}{p{17cm}}"
+  "\begin{tabular}{p{0.5cm}p{16.5cm}}"
   write$ newline$
 }
 EXECUTE {begin.bib}
