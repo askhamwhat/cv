@@ -116,9 +116,6 @@ FUNCTION {output.check}
 FUNCTION {fin.entry}
 { add.period$
   write$
-  "\label{" write$
-  cite$ write$
-  "}" write$
   "\\" write$
   newline$
 }
@@ -464,7 +461,7 @@ FUNCTION {format.doi}
 { doi empty$
     { "" }
     {
-      "\doi{" doi * "}" *
+      ""
     }
   if$
 }
@@ -1365,12 +1362,6 @@ FUNCTION {begin.bib}
     'skip$
     { preamble$ write$ newline$ }
   if$
-  "\expandafter\ifx\csname urlstyle\endcsname\relax"
-  write$ newline$
-  "  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else"
-  write$ newline$
-  "  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup \urlstyle{rm}\Url}\fi"
-  write$ newline$
   "\begin{tabular}{p{0.5cm}p{16.5cm}}"
   write$ newline$
 }
