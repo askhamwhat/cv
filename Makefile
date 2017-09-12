@@ -11,7 +11,7 @@ cvpre.bib cvpub.bib: cv.bib
 	pdflatex $(patsubst %.bbl,%,$@)
 	pdflatex $(patsubst %.bbl,%,$@)
 
-cv1.tex: cv1before.tex cv1after.tex cvpre.bbl cvpub.bbl
+cv1.tex: cv1before.tex cv1after.tex cvpre.bbl cvpub.bbl cv.bib
 	@cat cv1before.tex > cv1.tex
 	@echo "\section{Publications}" >> cv1.tex
 	@echo "" >> cv1.tex
